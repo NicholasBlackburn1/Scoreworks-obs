@@ -77,8 +77,10 @@ namespace NEP.Scoreworks
         {
             Core.ScoreworksManager.instance?.Update();
             Core.Director.Update();
-            sendkillsAsync(deaths(Core.ScoreworksManager.instance.currentScore))
-            
+
+            // Should send kills to server
+            sendkillsAsync(deaths(Core.ScoreworksManager.instance.currentScore),"setkills")
+            sendkillsAsync(deaths(Core.ScoreworksManager.instance.currentScore),"setHighScore")
         }
 
         public void SpawnHUD(GameObject hudObject)
@@ -173,14 +175,14 @@ namespace NEP.Scoreworks
             return json;
         }
 
-        // so i can send it this shit to obs
-        public async Task sendkillsAsync(string data)
+        // sends data o the webserver 
+        public async Task sendkillsAsync(string data, string endpoint)
         {
             try
             {
                 MelonLogger.Msg("trying to send data to server");
 
-                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:5000/setkills");
+                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:5000/"+ endpoint);
                 httpWebRequest.ContentType = "application/json; charset=utf-8";
                 httpWebRequest.Method = "POST";
 
