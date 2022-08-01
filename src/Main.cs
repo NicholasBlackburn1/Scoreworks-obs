@@ -12,7 +12,7 @@ namespace NEP.Scoreworks
     public static class BuildInfo
     {
         public const string Name = "Scoreworks - Version 3.0"; // Name of the Mod.  (MUST BE SET)
-        public const string Author = "Not Enough Photons"; // Author of the Mod.  (Set as null if none)
+        public const string Author = "Nicky Blackburn"; // Author of the Mod.  (Set as null if none)
         public const string Company = null; // Company that made the Mod.  (Set as null if none)
         public const string Version = "3.0.0"; // Version of the Mod.  (MUST BE SET)
         public const string DownloadLink = null; // Download Link for the Mod.  (Set as null if none)
