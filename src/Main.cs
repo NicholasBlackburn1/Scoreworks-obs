@@ -80,7 +80,7 @@ namespace NEP.Scoreworks
 
             // Should send kills to server
             sendkillsAsync(deaths(Core.ScoreworksManager.instance.currentScore),"setkills")
-            sendkillsAsync(deaths(Core.ScoreworksManager.instance.currentScore),"setHighScore")
+            sendkillsAsync(deaths(Core.ScoreworksManager.instance.highScore),"setHighScore")
         }
 
         public void SpawnHUD(GameObject hudObject)
@@ -163,7 +163,7 @@ namespace NEP.Scoreworks
         
         
         }
-
+            // creates json so i can send the score data over to flask
           private string deaths(int kills)
         {
             var data = new[] {
