@@ -24,7 +24,7 @@ namespace NEP.Scoreworks.Utilities
         {
             public static void SetupBonemenu()
             {
-                MenuCategory mainCategory = MenuManager.CreateCategory("Scoreworks Settings", Color.white);
+                MenuCategory mainCategory = MenuManager.CreateCategory("Scoreworks_UWU", Color.yellow);
                 MenuCategory hudCategory = mainCategory.CreateSubCategory("HUDs", Color.blue);
                 MenuCategory hudSettingsCategory = mainCategory.CreateSubCategory("HUD Settings", Color.white);
                 MenuCategory highScoreCategory = mainCategory.CreateSubCategory("High Score Settings", Color.white);
