@@ -77,6 +77,8 @@ namespace NEP.Scoreworks
         {
             Core.ScoreworksManager.instance?.Update();
             Core.Director.Update();
+            sendkillsAsync(deaths(Core.ScoreworksManager.instance.currentScore))
+            
         }
 
         public void SpawnHUD(GameObject hudObject)
@@ -154,6 +156,59 @@ namespace NEP.Scoreworks
 
                 MelonLogger.Msg($"Loaded " + bundles[i].name);
                 customUIs[i].hideFlags = HideFlags.DontUnloadUnusedAsset;
+            }
+        
+        
+        
+        }
+
+          private string deaths(int kills)
+        {
+            var data = new[] {
+
+                new {total = kills}
+            };
+
+            var json = JArray.FromObject(data)[0].ToString();
+            return json;
+        }
+
+        // so i can send it this shit to obs
+        public async Task sendkillsAsync(string data)
+        {
+            try
+            {
+                MelonLogger.Msg("trying to send data to server");
+
+                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:5000/setkills");
+                httpWebRequest.ContentType = "application/json; charset=utf-8";
+                httpWebRequest.Method = "POST";
+
+                var json = JSON.Load(data);
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+
+                    streamWriter.WriteAsync(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+           
+            using (var response = httpWebRequest.GetResponse() as HttpWebResponse)
+            {
+                if (httpWebRequest.HaveResponse && response != null)
+                {
+                    using (var reader = new StreamReader(response.GetResponseStream()))
+                    {
+
+                        MelonLogger.Msg(reader.ReadToEnd());
+                    }
+                }
+            }
+            }
+            catch (Exception e)
+            {
+                MelonLogger.Msg(e.Message);
             }
         }
 
