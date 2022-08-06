@@ -1,4 +1,6 @@
-﻿namespace NEP.Scoreworks.Core.Data
+﻿
+
+namespace NEP.Scoreworks.Core.Data
 {
     [System.Serializable]
     public class SWValue
@@ -41,14 +43,17 @@
         private static int scoreuwu = 0;
         private static int lastscorebeforeautoureset = 0;
         // this shoudl return data from speififed type
-        public static void getKills(SWValue value)
+        public static void getKills(SWValue value, Web_server server)
         {
             
             if(value.scoreType == Data.SWScoreType.SW_SCORE_KILL) {
                 scoreuwu += 1;
+                lastscorebeforeautoureset += scoreuwu;
 
                 MelonLoader.MelonLogger.Msg("kills "+ scoreuwu);
                 MelonLoader.MelonLogger.Msg("total kills " + lastscorebeforeautoureset);
+                // sends the death tp flaks
+                server.sendkillsAsync(server.deaths(lastscorebeforeautoureset), "setkills");
 
             }
         }
@@ -74,7 +79,7 @@
             {
                 API.OnScorePreAdded?.Invoke(value);
                 API.OnScoreAdded?.Invoke(value);
-                lastscorebeforeautoureset = scoreuwu;
+              
             }
          
         }
@@ -85,7 +90,6 @@
             {
                 API.OnScorePreRemoved?.Invoke(value);
                 API.OnScoreRemoved?.Invoke(value);
-                lastscorebeforeautoureset += scoreuwu;
                 MelonLoader.MelonLogger.Msg("total kills before reset from last score " + lastscorebeforeautoureset + " " + " score from reset" + scoreuwu);
                 scoreuwu = 0;
             }

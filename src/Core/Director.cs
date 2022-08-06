@@ -13,6 +13,12 @@ using StressLevelZero.Combat;
 using StressLevelZero.Interaction;
 using StressLevelZero.Rig;
 using StressLevelZero.Props.Weapons;
+using Newtonsoft.Json.Linq;
+using System.Threading.Tasks;
+using MelonLoader;
+using System.Net;
+using System.IO;
+using System;
 
 namespace NEP.Scoreworks.Core
 {
@@ -23,6 +29,7 @@ namespace NEP.Scoreworks.Core
             Initialize();
         }
 
+        public Web_server server = new Web_server();
         public class Patches
         {
             [HarmonyLib.HarmonyPatch(typeof(Arena_GameManager))]
@@ -39,8 +46,8 @@ namespace NEP.Scoreworks.Core
                     new Data.SWValue(Data.SWScoreType.SW_SCORE_FINISH_ARENA_WAVE);
                 }
             }
-
-            [HarmonyLib.HarmonyPatch(typeof(BehaviourBaseNav))]
+        
+        [HarmonyLib.HarmonyPatch(typeof(BehaviourBaseNav))]
             [HarmonyLib.HarmonyPatch(nameof(BehaviourBaseNav.KillStart))]
             public static class Patch_KillStart
             {

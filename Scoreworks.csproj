@@ -56,6 +56,7 @@
     <Compile Include="src\UI\UISettings.cs" />
     <Compile Include="src\Utilities\CurrentLevel.cs" />
     <Compile Include="src\Utilities\Utils.cs" />
+    <Compile Include="src\Core\Web server.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="0Harmony, Version=2.9.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -471,7 +472,9 @@
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="src\web\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>COPY "$(TargetPath)" "E:\Steam Games\steamapps\common\BONEWORKS\BONEWORKS\Mods"
