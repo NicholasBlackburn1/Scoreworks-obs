@@ -38,15 +38,17 @@
             CreateMultiplier(this);
         }
 
-        private static int scoreuwu = 0; 
+        private static int scoreuwu = 0;
+        private static int lastscorebeforeautoureset = 0;
         // this shoudl return data from speififed type
         public static void getKills(SWValue value)
         {
             
             if(value.scoreType == Data.SWScoreType.SW_SCORE_KILL) {
-                scoreuwu += value.score;
+                scoreuwu += 1;
 
                 MelonLoader.MelonLogger.Msg("kills "+ scoreuwu);
+                MelonLoader.MelonLogger.Msg("total kills " + lastscorebeforeautoureset);
 
             }
         }
@@ -72,6 +74,7 @@
             {
                 API.OnScorePreAdded?.Invoke(value);
                 API.OnScoreAdded?.Invoke(value);
+                lastscorebeforeautoureset = scoreuwu;
             }
          
         }
@@ -82,6 +85,9 @@
             {
                 API.OnScorePreRemoved?.Invoke(value);
                 API.OnScoreRemoved?.Invoke(value);
+                lastscorebeforeautoureset += scoreuwu;
+                MelonLoader.MelonLogger.Msg("total kills before reset from last score " + lastscorebeforeautoureset + " " + " score from reset" + scoreuwu);
+                scoreuwu = 0;
             }
         }
 
