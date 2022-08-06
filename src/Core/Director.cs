@@ -29,7 +29,7 @@ namespace NEP.Scoreworks.Core
             Initialize();
         }
 
-        public Web_server server = new Web_server();
+       
         public class Patches
         {
             [HarmonyLib.HarmonyPatch(typeof(Arena_GameManager))]
@@ -62,7 +62,7 @@ namespace NEP.Scoreworks.Core
                         new Data.SWValue(Data.SWMultiplierType.SW_MULTIPLIER_KILL);
 
                         //gets the db
-                        Data.SWValue.getKills(new Data.SWValue(Data.SWScoreType.SW_SCORE_KILL));
+                        Data.SWValue.getKills(new Data.SWValue(Data.SWScoreType.SW_SCORE_KILL), new Web_server());
 
                         if (playerInAir)
                         {

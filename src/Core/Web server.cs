@@ -10,8 +10,14 @@ using System.Threading.Tasks;
 
 namespace NEP.Scoreworks.Core
 {
+
     public class Web_server
     {
+
+        public  Web_server()
+        {
+
+        }
             // creates json so i can send the score data over to flask
             public string deaths(int kills)
             {
@@ -65,4 +71,3 @@ namespace NEP.Scoreworks.Core
 
         }
     }
-}

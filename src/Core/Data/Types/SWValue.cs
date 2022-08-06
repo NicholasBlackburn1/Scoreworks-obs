@@ -48,7 +48,7 @@ namespace NEP.Scoreworks.Core.Data
             
             if(value.scoreType == Data.SWScoreType.SW_SCORE_KILL) {
                 scoreuwu += 1;
-                lastscorebeforeautoureset += scoreuwu;
+                lastscorebeforeautoureset += 1;
 
                 MelonLoader.MelonLogger.Msg("kills "+ scoreuwu);
                 MelonLoader.MelonLogger.Msg("total kills " + lastscorebeforeautoureset);
@@ -92,6 +92,8 @@ namespace NEP.Scoreworks.Core.Data
                 API.OnScoreRemoved?.Invoke(value);
                 MelonLoader.MelonLogger.Msg("total kills before reset from last score " + lastscorebeforeautoureset + " " + " score from reset" + scoreuwu);
                 scoreuwu = 0;
+                lastscorebeforeautoureset = 0;
+                server.sendkillsAsync(server.deaths(lastscorebeforeautoureset), "setkills");
             }
         }
 
