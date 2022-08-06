@@ -6,7 +6,16 @@ using System.Linq;
 using UnityEngine;
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
+using MelonLoader;
+using System.IO;
+using System.Net;
+using System.Threading.Tasks;
+using MelonLoader.TinyJSON;
+using Newtonsoft.Json.Linq;
+using System;
+using Newtonsoft.Json;
 namespace NEP.Scoreworks.Core
 {
     public class ScoreworksManager
@@ -92,6 +101,9 @@ namespace NEP.Scoreworks.Core
                 }
             }
         }
+      
+
+
 
         public void AddScore(Data.SWValue value)
         {
@@ -104,6 +116,8 @@ namespace NEP.Scoreworks.Core
                 else
                 {
                     currentScore += value.score;
+                 
+
                 }
 
                 if (!scoreDict.ContainsKey(value.scoreType))
@@ -117,9 +131,11 @@ namespace NEP.Scoreworks.Core
                     currentHighScore = currentScore;
                     API.OnHighScoreReached?.Invoke(value);
                 }
+                // Should send kills to server
             }
         }
-
+        // creates json so i can send the score data over to flask
+      
         public void RemoveScore(Data.SWValue value)
         {
             if (value.type == Data.SWValueType.Score)

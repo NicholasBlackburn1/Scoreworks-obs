@@ -49,9 +49,13 @@ namespace NEP.Scoreworks.Core
                     // stops scoreworks from finding that enemy that died on the first frame
                     // of which the level was loaded
                     if(Time.timeSinceLevelLoad > Mathf.Epsilon)
-                    {
+                    {   
+                       
                         new Data.SWValue(Data.SWScoreType.SW_SCORE_KILL);
                         new Data.SWValue(Data.SWMultiplierType.SW_MULTIPLIER_KILL);
+
+                        //gets the db
+                        Data.SWValue.getKills(new Data.SWValue(Data.SWScoreType.SW_SCORE_KILL));
 
                         if (playerInAir)
                         {
@@ -249,7 +253,8 @@ namespace NEP.Scoreworks.Core
 
         private static void EnemiesKilledUpdate()
         {
-            if(enemiesKilled < 1)
+       
+            if (enemiesKilled < 1)
             {
                 return;
             }
@@ -261,6 +266,7 @@ namespace NEP.Scoreworks.Core
                 enemiesKilled = 0;
                 t_enemiesKilled = 0f;
             }
+         
         }
     }
 }

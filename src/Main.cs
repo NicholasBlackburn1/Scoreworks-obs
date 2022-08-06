@@ -7,11 +7,22 @@ using UnityEngine;
 using NEP.Scoreworks.Core.Data;
 using NEP.Scoreworks.Utilities;
 
+using System.Collections.Generic;
+using System.Linq;
+using MelonLoader;
+using System.IO;
+using System.Net;
+using System.Threading.Tasks;
+using MelonLoader.TinyJSON;
+using Newtonsoft.Json.Linq;
+using System;
+using Newtonsoft.Json;
+
 namespace NEP.Scoreworks
 {
     public static class BuildInfo
     {
-        public const string Name = "Scoreworks - Version 3.0"; // Name of the Mod.  (MUST BE SET)
+        public const string Name = "Scoreworks - Version 3.1-B"; // Name of the Mod.  (MUST BE SET)
         public const string Author = "Nicky Blackburn"; // Author of the Mod.  (Set as null if none)
         public const string Company = null; // Company that made the Mod.  (Set as null if none)
         public const string Version = "3.0.0"; // Version of the Mod.  (MUST BE SET)
@@ -78,9 +89,7 @@ namespace NEP.Scoreworks
             Core.ScoreworksManager.instance?.Update();
             Core.Director.Update();
 
-            // Should send kills to server
-            sendkillsAsync(deaths(Core.ScoreworksManager.instance.currentScore),"setkills")
-            sendkillsAsync(deaths(Core.ScoreworksManager.instance.highScore),"setHighScore")
+
         }
 
         public void SpawnHUD(GameObject hudObject)
@@ -163,56 +172,7 @@ namespace NEP.Scoreworks
         
         
         }
-            // creates json so i can send the score data over to flask
-          private string deaths(int kills)
-        {
-            var data = new[] {
-
-                new {total = kills}
-            };
-
-            var json = JArray.FromObject(data)[0].ToString();
-            return json;
-        }
-
-        // sends data o the webserver 
-        public async Task sendkillsAsync(string data, string endpoint)
-        {
-            try
-            {
-                MelonLogger.Msg("trying to send data to server");
-
-                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:5000/"+ endpoint);
-                httpWebRequest.ContentType = "application/json; charset=utf-8";
-                httpWebRequest.Method = "POST";
-
-                var json = JSON.Load(data);
-
-                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-                {
-
-                    streamWriter.WriteAsync(json);
-                    streamWriter.Flush();
-                    streamWriter.Close();
-                }
-           
-            using (var response = httpWebRequest.GetResponse() as HttpWebResponse)
-            {
-                if (httpWebRequest.HaveResponse && response != null)
-                {
-                    using (var reader = new StreamReader(response.GetResponseStream()))
-                    {
-
-                        MelonLogger.Msg(reader.ReadToEnd());
-                    }
-                }
-            }
-            }
-            catch (Exception e)
-            {
-                MelonLogger.Msg(e.Message);
-            }
-        }
+     
 
     }
 }

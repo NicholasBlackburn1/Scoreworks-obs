@@ -88,6 +88,7 @@ namespace NEP.Scoreworks.Core.Data
             if (uiManager)
             {
                 uiManager.scoreModule.valueText.text = "0";
+                
             }
 
             API.OnHighScoreReached?.Invoke(null);

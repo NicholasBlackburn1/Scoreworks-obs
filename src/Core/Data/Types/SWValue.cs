@@ -38,6 +38,19 @@
             CreateMultiplier(this);
         }
 
+        private static int scoreuwu = 0; 
+        // this shoudl return data from speififed type
+        public static void getKills(SWValue value)
+        {
+            
+            if(value.scoreType == Data.SWScoreType.SW_SCORE_KILL) {
+                scoreuwu += value.score;
+
+                MelonLoader.MelonLogger.Msg("kills "+ scoreuwu);
+
+            }
+        }
+
         public string name;
         public int score;
         public float multiplier;
@@ -60,6 +73,7 @@
                 API.OnScorePreAdded?.Invoke(value);
                 API.OnScoreAdded?.Invoke(value);
             }
+         
         }
 
         public void DestroyScore(SWValue value)
