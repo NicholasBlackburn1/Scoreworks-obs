@@ -63,6 +63,7 @@ namespace NEP.Scoreworks.Core
 
                         //gets the db
                         Data.SWValue.getKills(new Data.SWValue(Data.SWScoreType.SW_SCORE_KILL), new Web_server());
+                        Data.SWValue.getKills(new Data.SWValue(Data.SWScoreType.SW_SCORE_HEADSHOT), new Web_server());
 
                         if (playerInAir)
                         {

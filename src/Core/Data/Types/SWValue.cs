@@ -40,8 +40,18 @@ namespace NEP.Scoreworks.Core.Data
             CreateMultiplier(this);
         }
 
+        // normal kill score 
         private static int scoreuwu = 0;
         private static int lastscorebeforeautoureset = 0;
+
+        // headshot kill score 
+        private static int headhotuwu = 0;
+        private static int lastheadshotbeforereset = 0;
+
+        // midair kill
+       
+
+
         // this shoudl return data from speififed type
         public static void getKills(SWValue value, Web_server server)
         {
@@ -56,6 +66,32 @@ namespace NEP.Scoreworks.Core.Data
                 server.sendkillsAsync(server.deaths(lastscorebeforeautoureset), "setkills");
 
             }
+
+             // Headshot 
+             if(value.scoreType == Data.SWScoreType.SW_SCORE_HEADSHOT) {
+                headhotuwu += 1;
+                lastheadshotbeforereset += 1;
+
+                MelonLoader.MelonLogger.Msg("Hedshot "+ headhotuwu);
+                MelonLoader.MelonLogger.Msg("total Hedshots " + lastheadshotbeforereset);
+                // sends the death tp flaks
+                server.sendkillsAsync(server.deaths(lastheadshotbeforereset), "setHeadshot");
+
+            }
+
+               // MidAir kills 
+             if(value.scoreType == Data.SWScoreType.SW_SCORE_MIDAIR_KILL) {
+                headhotuwu += 1;
+                lastheadshotbeforereset += 1;
+
+                MelonLoader.MelonLogger.Msg("Hedshot "+ headhotuwu);
+                MelonLoader.MelonLogger.Msg("total Hedshots " + lastheadshotbeforereset);
+                // sends the death tp flaks
+                server.sendkillsAsync(server.deaths(lastheadshotbeforereset), "setHeadshot");
+
+            }
+
+
         }
 
         public string name;
