@@ -68,6 +68,7 @@ namespace NEP.Scoreworks.Core
                         if (playerInAir)
                         {
                             new Data.SWValue(Data.SWScoreType.SW_SCORE_MIDAIR_KILL);
+                            Data.SWValue.getKills(new Data.SWValue(Data.SWScoreType.SW_SCORE_MIDAIR_KILL), new Web_server());
                         }
                     }
                 }

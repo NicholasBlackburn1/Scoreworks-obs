@@ -49,7 +49,8 @@ namespace NEP.Scoreworks.Core.Data
         private static int lastheadshotbeforereset = 0;
 
         // midair kill
-       
+        private static int midairkill = 0;
+        private static int midairlastkill=0;
 
 
         // this shoudl return data from speififed type
@@ -81,13 +82,13 @@ namespace NEP.Scoreworks.Core.Data
 
                // MidAir kills 
              if(value.scoreType == Data.SWScoreType.SW_SCORE_MIDAIR_KILL) {
-                headhotuwu += 1;
-                lastheadshotbeforereset += 1;
+                midairkill += 1;
+                midairlastkill += 1;
 
-                MelonLoader.MelonLogger.Msg("Hedshot "+ headhotuwu);
-                MelonLoader.MelonLogger.Msg("total Hedshots " + lastheadshotbeforereset);
+                MelonLoader.MelonLogger.Msg("Midair kills "+ midairkill);
+                MelonLoader.MelonLogger.Msg("total Midair  " + midairlastkill);
                 // sends the death tp flaks
-                server.sendkillsAsync(server.deaths(lastheadshotbeforereset), "setHeadshot");
+                server.sendkillsAsync(server.deaths(midairlastkill), "setHeadshot");
 
             }
 
